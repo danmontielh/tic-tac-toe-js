@@ -1,0 +1,40 @@
+#container {
+    width: 320px;
+    height: 320px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+#container h1 {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+.t {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin:0;
+    padding: 0;
+    cursor: pointer;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 100px;
+}
+
+.t:hover {
+    background-color: azure;
+}
+
+#t0,#t1, #t2, #t3,#t4, #t5 {
+    border-bottom: 10px solid black;
+}
+
+#t2,#t5, #t8, #t1,#t4, #t7 {
+    border-left: 10px solid black;
+}
+
+.winner {
+    color:red
+}
