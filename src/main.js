@@ -51,12 +51,13 @@ const checkForVictory = () => {
 const oponentTurn = () => {
   disableListeners();
   setTimeout(() => {
-    takeTurn(oponentChoice(), "o");
+    takeTurn(oponentChoice(), 'o');
     if (!checkForVictory()) {
       enableListeners();
     }
   }, 1000);
 };
+
 const clickfn = $event => {
   takeTurn(qNumId($event.target), "x");
   if (!checkForVictory()) {
@@ -64,11 +65,18 @@ const clickfn = $event => {
   }
 };
 
+
+
 const enableListeners = () => {
   grid().forEach(_qE1 => _qE1.addEventListener("click", clickfn));
 };
+
+
+
 const disableListeners = () => {
   grid().forEach(_qE1 => _qE1.removeEventListener("click", clickfn));
 };
+
+
 
 enableListeners();
