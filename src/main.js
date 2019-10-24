@@ -52,11 +52,8 @@ const gameEngine = () => {
   };
 
   const playerTurn = (index, markPlayer) => {
-      if (grid()[index].innerText == "") {
-        (grid()[index].innerText = markPlayer); 
-      } else {
-           alert('Please, this is an invalid move');
-      }
+        grid()[index].style.pointerEvents = "none";
+        grid()[index].innerText = markPlayer; 
   };
 
   return { playerTurn, winGame };
