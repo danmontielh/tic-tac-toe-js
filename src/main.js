@@ -30,8 +30,6 @@ const gameEngine = () => {
   const getElementsAll = arr =>
     arr.every(el => el.innerText === arr[0].innerText && el.innerText !== "");
 
-
-
   const endGame = comboWin => {
     comboWin.forEach(el => {
       el.classList.add("winner");
@@ -52,8 +50,8 @@ const gameEngine = () => {
   };
 
   const playerTurn = (index, markPlayer) => {
-        grid()[index].style.pointerEvents = "none";
-        grid()[index].innerText = markPlayer; 
+    grid()[index].style.pointerEvents = "none";
+    grid()[index].innerText = markPlayer;
   };
 
   return { playerTurn, winGame };
@@ -71,12 +69,13 @@ const runGame = () => {
       game.playerTurn(newGame.getId($event.target), playerOne.mark);
       turn = false;
       if (!game.winGame(PlayerEnd)) {
-        console.log(playerOne.name);
+        document.getElementById("player").innerText = playerTwo.name;
       }
     } else {
       game.playerTurn(newGame.getId($event.target), playerTwo.mark);
       turn = true;
       if (!game.winGame(PlayerEnd)) {
+        document.getElementById("player").innerText = playerOne.name;
       }
     }
   };
