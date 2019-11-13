@@ -34,3 +34,12 @@
 .winner {
     color:red
 }
+
+#info {
+    margin: 20px;
+}
+
+.btn {
+    margin-left: 36%;
+    margin-bottom: 30px;
+}

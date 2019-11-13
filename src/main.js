@@ -15,7 +15,9 @@ const createPlayer = (mark, name) => {
   return { mark, name };
 };
 
-let newGame = document.querySelector('button');
+let restartGame = document.querySelector('button');
+
+let totalMoves = 0;
 
 const gameEngine = () => {
   const winningCombos = [
@@ -61,7 +63,7 @@ const gameEngine = () => {
     grid()[index].innerText = markPlayer;
   };
 
-  return { playerTurn, winGame };
+  return { playerTurn, winGame, totalMoves };
 };
 
 const runGame = () => {
@@ -85,6 +87,9 @@ const runGame = () => {
         document.getElementById("player").innerText = playerOne.name;
       }
     }
+    if(++game.totalMoves === 9 && !game.winGame(PlayerEnd)) {
+      document.getElementById('info').innerHTML += `<div class="alert alert-warning" role="alert">It's tie! </div>`;
+    }
   };
 
   const playerOneListen = () => {
@@ -98,7 +103,7 @@ const runGame = () => {
   return { playerOneListen };
 };
 
-newGame.addEventListener('click', () => {
+restartGame.addEventListener('click', () => {
 	window.location.reload();
 });
 
