@@ -15,6 +15,8 @@ const createPlayer = (mark, name) => {
   return { mark, name };
 };
 
+let newGame = document.querySelector('button');
+
 const gameEngine = () => {
   const winningCombos = [
     [0, 1, 2],
@@ -43,8 +45,13 @@ const gameEngine = () => {
       const getClassCombo = [_grid[combo[0]], _grid[combo[1]], _grid[combo[2]]];
       if (getElementsAll(getClassCombo)) {
         victory = true;
-        endGame(getClassCombo);
+        endGame(getClassCombo)
         disable();
+        const winner = document.getElementById("player").innerText;
+        const msg = confirm(winner + ' win this game! Do you want to play again?');
+        if (msg === true) {
+          window.location.reload();
+        }
       }
     });
   };
@@ -90,6 +97,10 @@ const runGame = () => {
 
   return { playerOneListen };
 };
+
+newGame.addEventListener('click', () => {
+	window.location.reload();
+});
 
 let launch = runGame();
 
