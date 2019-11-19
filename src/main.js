@@ -1,11 +1,11 @@
 // Board
 const grid = () => {
-  return Array.from(document.getElementsByClassName("t"));
+  return Array.from(document.getElementsByClassName('t'));
 };
 
 const board = () => {
   const getId = el => {
-    return Number.parseInt(el.id[1]);
+    return Number.parseInt(el.id[1], 10);
   };
 
   return { getId };
@@ -15,7 +15,7 @@ const createPlayer = (mark, name) => {
   return { mark, name };
 };
 
-let restartGame = document.querySelector('button');
+const restartGame = document.querySelector('button');
 
 let totalMoves = 0;
 
@@ -32,11 +32,11 @@ const gameEngine = () => {
   ];
 
   const getElementsAll = arr =>
-    arr.every(el => el.innerText === arr[0].innerText && el.innerText !== "");
+    arr.every(el => el.innerText === arr[0].innerText && el.innerText !== '');
 
   const endGame = comboWin => {
     comboWin.forEach(el => {
-      el.classList.add("winner");
+      el.classList.add('winner');
     });
   };
 
@@ -49,7 +49,7 @@ const gameEngine = () => {
         victory = true;
         endGame(getClassCombo)
         disable();
-        const winner = document.getElementById("player").innerText;
+        const winner = document.getElementById('player').innerText;
         const msg = confirm(winner + ' win this game! Do you want to play again?');
         if (msg === true) {
           window.location.reload();
@@ -59,7 +59,7 @@ const gameEngine = () => {
   };
 
   const playerTurn = (index, markPlayer) => {
-    grid()[index].style.pointerEvents = "none";
+    grid()[index].style.pointerEvents = 'none';
     grid()[index].innerText = markPlayer;
   };
 
@@ -70,21 +70,21 @@ const runGame = () => {
   let turn = true;
   const newGame = board();
   const game = gameEngine();
-  let playerOne = createPlayer("x", "Player One");
-  let playerTwo = createPlayer("o", "Player Two");
+  let playerOne = createPlayer('x', 'Player One');
+  let playerTwo = createPlayer('o', 'Player Two');
 
   const playerTurns = $event => {
     if (turn == true) {
       game.playerTurn(newGame.getId($event.target), playerOne.mark);
       turn = false;
       if (!game.winGame(PlayerEnd)) {
-        document.getElementById("player").innerText = playerTwo.name;
+        document.getElementById('player').innerText = playerTwo.name;
       }
     } else {
       game.playerTurn(newGame.getId($event.target), playerTwo.mark);
       turn = true;
       if (!game.winGame(PlayerEnd)) {
-        document.getElementById("player").innerText = playerOne.name;
+        document.getElementById('player').innerText = playerOne.name;
       }
     }
     if(++game.totalMoves === 9 && !game.winGame(PlayerEnd)) {
@@ -93,11 +93,11 @@ const runGame = () => {
   };
 
   const playerOneListen = () => {
-    grid().forEach(el => el.addEventListener("click", playerTurns));
+    grid().forEach(el => el.addEventListener('click', playerTurns));
   };
 
   const PlayerEnd = () => {
-    grid().forEach(el => el.removeEventListener("click", playerTurns));
+    grid().forEach(el => el.removeEventListener('click', playerTurns));
   };
 
   return { playerOneListen };
