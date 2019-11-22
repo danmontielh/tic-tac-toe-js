@@ -29,19 +29,19 @@ const gameEngine = () => {
     [2, 5, 8],
   ];
 
-  const getElementsAll = arr => {
+  const getElementsAll = (arr) => {
     return arr.every((el) => {
       return el.innerText === arr[0].innerText && el.innerText !== '';
     });
   };
 
-  const endGame = comboWin => {
+  const endGame = (comboWin) => {
     comboWin.forEach((el) => {
       el.classList.add('winner');
     });
   };
 
-  const winGame = disable => {
+  const winGame = (disable) => {
     let victory = false;
     winningCombos.forEach((combo) => {
       const _grid = grid();
