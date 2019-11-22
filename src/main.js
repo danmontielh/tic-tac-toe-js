@@ -4,9 +4,7 @@ const grid = () => {
 };
 
 const board = () => {
-  const getId = el => {
-    return Number.parseInt(el.id[1], 10);
-  };
+  const getId = el => Number.parseInt(el.id[1], 10);
 
   return { getId };
 };
@@ -31,15 +29,14 @@ const gameEngine = () => {
     [2, 5, 8],
   ];
 
-  const getElementsAll = arr =>
-    {
-      return arr.every(el => {
-        return el.innerText === arr[0].innerText && el.innerText !== '';
-      });
-    };
+  const getElementsAll = arr => {
+    return arr.every((el) => {
+      return el.innerText === arr[0].innerText && el.innerText !== '';
+    });
+  };
 
   const endGame = comboWin => {
-    comboWin.forEach(el => {
+    comboWin.forEach((el) => {
       el.classList.add('winner');
     });
   };
@@ -71,7 +68,9 @@ const gameEngine = () => {
 };
 
 const PlayerEnd = () => {
-  grid().forEach(el => el.removeEventListener('click', playerTurns));
+  grid().forEach((el) => {
+    return el.removeEventListener('click', playerTurns);
+  });
 };
 
 const runGame = () => {
@@ -96,12 +95,12 @@ const runGame = () => {
       }
     }
     if (++game.totalMoves === 9 && !game.winGame(PlayerEnd)) {
-      document.getElementById('info').innerHTML += `<div class="alert alert-warning" role="alert">It's tie! </div>`;
+      document.getElementById('info').innerHTML += `<div class='alert alert-warning' role='alert'>It's tie! </div>`;
     }
   };
 
   const playerOneListen = () => {
-    grid().forEach(el => {
+    grid().forEach((el) => {
       return el.addEventListener('click', playerTurns);
     });
   };
