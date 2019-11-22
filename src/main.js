@@ -17,7 +17,7 @@ const createPlayer = (mark, name) => {
 
 const restartGame = document.querySelector('button');
 
-let totalMoves = 0;
+const totalMoves = 0;
 
 const gameEngine = () => {
   const winningCombos = [
@@ -28,11 +28,15 @@ const gameEngine = () => {
     [2, 4, 6],
     [0, 3, 6],
     [1, 4, 7],
-    [2, 5, 8]
+    [2, 5, 8],
   ];
 
   const getElementsAll = arr =>
-    arr.every(el => el.innerText === arr[0].innerText && el.innerText !== '');
+    {
+      return arr.every(el => {
+        return el.innerText === arr[0].innerText && el.innerText !== '';
+      });
+    };
 
   const endGame = comboWin => {
     comboWin.forEach(el => {
@@ -42,12 +46,12 @@ const gameEngine = () => {
 
   const winGame = disable => {
     let victory = false;
-    winningCombos.forEach(combo => {
+    winningCombos.forEach((combo) => {
       const _grid = grid();
       const getClassCombo = [_grid[combo[0]], _grid[combo[1]], _grid[combo[2]]];
       if (getElementsAll(getClassCombo)) {
         victory = true;
-        endGame(getClassCombo)
+        endGame(getClassCombo);
         disable();
         const winner = document.getElementById('player').innerText;
         const msg = confirm(winner + ' win this game! Do you want to play again?');
@@ -66,15 +70,19 @@ const gameEngine = () => {
   return { playerTurn, winGame, totalMoves };
 };
 
+const PlayerEnd = () => {
+  grid().forEach(el => el.removeEventListener('click', playerTurns));
+};
+
 const runGame = () => {
   let turn = true;
   const newGame = board();
   const game = gameEngine();
-  let playerOne = createPlayer('x', 'Player One');
-  let playerTwo = createPlayer('o', 'Player Two');
+  const playerOne = createPlayer('x', 'Player One');
+  const playerTwo = createPlayer('o', 'Player Two');
 
-  const playerTurns = $event => {
-    if (turn == true) {
+  const playerTurns = ($event) => {
+    if (turn === true) {
       game.playerTurn(newGame.getId($event.target), playerOne.mark);
       turn = false;
       if (!game.winGame(PlayerEnd)) {
@@ -87,26 +95,24 @@ const runGame = () => {
         document.getElementById('player').innerText = playerOne.name;
       }
     }
-    if(++game.totalMoves === 9 && !game.winGame(PlayerEnd)) {
+    if (++game.totalMoves === 9 && !game.winGame(PlayerEnd)) {
       document.getElementById('info').innerHTML += `<div class="alert alert-warning" role="alert">It's tie! </div>`;
     }
   };
 
   const playerOneListen = () => {
-    grid().forEach(el => el.addEventListener('click', playerTurns));
-  };
-
-  const PlayerEnd = () => {
-    grid().forEach(el => el.removeEventListener('click', playerTurns));
+    grid().forEach(el => {
+      return el.addEventListener('click', playerTurns);
+    });
   };
 
   return { playerOneListen };
 };
 
 restartGame.addEventListener('click', () => {
-	window.location.reload();
+  window.location.reload();
 });
 
-let launch = runGame();
+const launch = runGame();
 
 launch.playerOneListen();
