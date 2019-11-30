@@ -75,7 +75,12 @@ const runGame = () => {
   const game = gameEngine();
   const playerOne = createPlayer('x', document.getElementById('playerOne').value);
   const playerTwo = createPlayer('o', document.getElementById('playerTwo').value);
-  console.log(playerOne);
+
+  const PlayerEnd = () => {
+    grid().forEach((el) => {
+      return el.removeEventListener('click', playerTurns);
+    });
+  };
 
   const playerTurns = ($event) => {
     if (turn === true) {
@@ -123,7 +128,3 @@ setPlayerName.addEventListener('click', () => {
   const launch = runGame();
   launch.playerOneListen();
 });
-
-
-
-
