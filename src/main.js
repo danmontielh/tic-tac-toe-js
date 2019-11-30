@@ -109,12 +109,6 @@ const runGame = () => {
     });
   };
 
-  const PlayerEnd = () => {
-    grid().forEach((el) => {
-      return el.removeEventListener('click', playerTurns);
-    });
-  };
-
   return { playerOneListen };
 };
 
