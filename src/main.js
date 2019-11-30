@@ -14,6 +14,7 @@ const createPlayer = (mark, name) => {
 };
 
 const restartGame = document.querySelector('button');
+const setPlayerName = document.querySelector('a');
 
 const totalMoves = 0;
 
@@ -67,18 +68,14 @@ const gameEngine = () => {
   return { playerTurn, winGame, totalMoves };
 };
 
-const PlayerEnd = () => {
-  grid().forEach((el) => {
-    return el.removeEventListener('click', playerTurns);
-  });
-};
 
 const runGame = () => {
   let turn = true;
   const newGame = board();
   const game = gameEngine();
-  const playerOne = createPlayer('x', 'Player One');
-  const playerTwo = createPlayer('o', 'Player Two');
+  const playerOne = createPlayer('x', document.getElementById('playerOne').value);
+  const playerTwo = createPlayer('o', document.getElementById('playerTwo').value);
+  console.log(playerOne);
 
   const playerTurns = ($event) => {
     if (turn === true) {
@@ -86,12 +83,14 @@ const runGame = () => {
       turn = false;
       if (!game.winGame(PlayerEnd)) {
         document.getElementById('player').innerText = playerTwo.name;
+        document.getElementById('player').style.color = 'red';
       }
     } else {
       game.playerTurn(newGame.getId($event.target), playerTwo.mark);
       turn = true;
       if (!game.winGame(PlayerEnd)) {
         document.getElementById('player').innerText = playerOne.name;
+        document.getElementById('player').style.color = 'skyblue';
       }
     }
     if (++game.totalMoves === 9 && !game.winGame(PlayerEnd)) {
@@ -105,6 +104,12 @@ const runGame = () => {
     });
   };
 
+  const PlayerEnd = () => {
+    grid().forEach((el) => {
+      return el.removeEventListener('click', playerTurns);
+    });
+  };
+
   return { playerOneListen };
 };
 
@@ -112,6 +117,13 @@ restartGame.addEventListener('click', () => {
   window.location.reload();
 });
 
-const launch = runGame();
+setPlayerName.addEventListener('click', () => {
+  document.getElementById('displayPlayerName').style.display = 'block';
+  document.getElementById('start').style.display = 'none';
+  const launch = runGame();
+  launch.playerOneListen();
+});
 
-launch.playerOneListen();
+
+
+
