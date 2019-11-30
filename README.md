@@ -1,3 +1,3 @@
-SET UI
+# Microverse JavaScript(Tie Tac Toe Game)  Project. 
 
-# tic-tac-toe-js
+Author: <a href="https://github.com/danmontielh">Daniel Montiel</a> / <a href="https://github.com/TheBigSteph">Stephane Nzali</a>
